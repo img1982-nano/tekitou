@@ -68,7 +68,7 @@ client.on(Events.MessageCreate, async message => { //messageに作られたmessa
             .setTitle('ペペロンチーノ三世 - INFO')
             .addFields({name: '開発者', value: 'Azilamo'})
             .addFields({name:"用途", value:"いろいろ"})
-            .addFields({name:"コマンド", value:"info - BOTの情報を表示 ping - pong reasion - 開発中"})
+            .addFields({name:"コマンド", value:"info - BOTの情報を表示\n ping - pong\n reasion - なぞのリアクションをする\n random-wiki - wikipediaからランダムに記事を生成"})
             .setColor("Red")
             .setTimestamp()
             .setThumbnail("https://images.ctfassets.net/in6v9lxmm5c8/7J6X29QCpCjoReVMQFOC1D/f091383d411092eaa4487bad33560ca6/golang.png")
@@ -103,7 +103,11 @@ client.on(Events.MessageCreate, async message => { //messageに作られたmessa
                 components: [row],
             })
     }
-    if (message.content.startsWith("got-test")) {
-        console.log("null-command")
+    if (message.content.startsWith("random-wiki")) {
+        const response = await axios.get('https://ja.wikipedia.org/w/api.php?format=json&action=query&list=random&rnnamespace=0&rnlimit=1')
+        message.channel.send("タイトル  :   " + response.data.query.random[0].title + "\nリンク :   " + "https://ja.wikipedia.org/wiki/" + response.data.query.random[0].title)
+    }
+    if (message.content.startsWith("top-article")) {
+        message.channel.send("このコマンドは作成中です")
     }
 });
