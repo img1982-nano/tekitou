@@ -4,14 +4,17 @@
 require('date-utils')//Date(日時)を便利にするやつ
 
 //BOTトークンを変数tokenに読み込み
-const { token } = require('./config.json');
-
+const { token, SUPABASE_URL, SUPABASE_API_KEY } = require('./config.json');
+const supabaseUrl = SUPABASE_URL
+const supabaseAnonKey = SUPABASE_API_KEY
 //discord.jsをインポート
 const axios = require("axios")
 const { Client, GatewayIntentBits, Component } = require('discord.js');//discordjsから必要なのをrequire
 const { Events } = require("discord.js");
 const { ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 //co = require("discord.js-buttons")(client);
+const { createClient } = require("@supabase/supabase-js")
+
 const client = new Client({ //インテントを設定してクライアントを定義する
     intents: [
         GatewayIntentBits.Guilds,
@@ -21,6 +24,8 @@ const client = new Client({ //インテントを設定してクライアント�
     ],
 });
 
+// SUPABASE
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 //デバッグ用に情報書き出し
 console.log("-------start up-------");
 //今の時間をフォーマットしてstartup_timeに入れる
@@ -29,7 +34,6 @@ const startup_time = new Date().toFormat("YYYY/MM/DD HH24時MI分SS秒");
 console.log("start_up:" + startup_time);
 console.log("node js   version : " + process.versions.node);
 console.log("discordjs version : " + require('discord.js').version);
-
 console.log("----------------------");
 //デバッグ用に情報書き出し ここまで
 //ログイン処理
