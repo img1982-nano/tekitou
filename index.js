@@ -41,7 +41,7 @@ client.login(token);
 //起動したときに最初に走る処理
 client.on('ready', async () => {
     console.log(`${new Date().toFormat("YYYY/MM/DD HH24時MI分SS秒")} ${client.user.tag}でログインしました。`);
-    client.user.setActivity("ペペロンチーノ三世、通常営業中")
+    client.user.setActivity("あじぼっと、通常営業中")
 });
 client.on(Events.MessageCreate, async message => { //messageに作られたmessageとかいろいろ入る
     if (message.author.bot) {//メッセージの送信者がBOTなら
@@ -69,13 +69,13 @@ client.on(Events.MessageCreate, async message => { //messageに作られたmessa
         const { EmbedBuilder } = require("discord.js");
         const embed = new EmbedBuilder()
             .setDescription("Lang by JS")
-            .setTitle('ペペロンチーノ三世 - INFO')
+            .setTitle('あじぼっと - INFO')
             .addFields({name: '開発者', value: 'Azilamo'})
             .addFields({name:"用途", value:"いろいろ"})
             .addFields({name:"コマンド", value:"info - BOTの情報を表示\n ping - pong\n reasion - なぞのリアクションをする\n random-wiki - wikipediaからランダムに記事を生成"})
             .setColor("Red")
             .setTimestamp()
-            .setThumbnail("https://images.ctfassets.net/in6v9lxmm5c8/7J6X29QCpCjoReVMQFOC1D/f091383d411092eaa4487bad33560ca6/golang.png")
+            .setThumbnail("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvw1paQ3SS6EoTAh9SVIN7jO0j4yJCCVq41FV49wvCuitEhuinEi8LX-kkvNzjelYTNJTWMPr9Iks259KqDjMJrdEf5_lKP2nSfYGyDt0cGHQ6j6MwSVz6SAufFxy1eHScHKVn4sl6EAg/s400/food_aji_fry.png")
         message.channel.send({ embeds: [embed] })
     }
     if (message.content.startsWith("reasion")) {
@@ -88,10 +88,8 @@ client.on(Events.MessageCreate, async message => { //messageに作られたmessa
         message.react("🇿")
         message.react("🇮")
         message.react("🇱")
-        message.react("1315581965692567552")
         message.react("🇲")
         message.react("🇴")
-        message.react("1312766567339266129")
     }
     if (message.content.startsWith("buttes")) {
         const buttons = new ButtonBuilder()
@@ -110,8 +108,5 @@ client.on(Events.MessageCreate, async message => { //messageに作られたmessa
     if (message.content.startsWith("random-wiki")) {
         const response = await axios.get('https://ja.wikipedia.org/w/api.php?format=json&action=query&list=random&rnnamespace=0&rnlimit=1')
         message.channel.send("タイトル  :   " + response.data.query.random[0].title + "\nリンク :   " + "https://ja.wikipedia.org/wiki/" + response.data.query.random[0].title)
-    }
-    if (message.content.startsWith("top-article")) {
-        message.channel.send("このコマンドは作成中です")
     }
 });
