@@ -41,7 +41,7 @@ client.login(token);
 //起動したときに最初に走る処理
 client.on('ready', async () => {
     console.log(`${new Date().toFormat("YYYY/MM/DD HH24時MI分SS秒")} ${client.user.tag}でログインしました。`);
-    client.user.setActivity("ペペロンチーノ三世、通常営業中")
+    client.user.setActivity("あじぼっと、通常営業中")
 });
 client.on(Events.MessageCreate, async message => { //messageに作られたmessageとかいろいろ入る
     if (message.author.bot) {//メッセージの送信者がBOTなら
@@ -69,7 +69,7 @@ client.on(Events.MessageCreate, async message => { //messageに作られたmessa
         const { EmbedBuilder } = require("discord.js");
         const embed = new EmbedBuilder()
             .setDescription("Lang by JS")
-            .setTitle('ペペロンチーノ三世 - INFO')
+            .setTitle('Azibot - INFO')
             .addFields({name: '開発者', value: 'Azilamo'})
             .addFields({name:"用途", value:"いろいろ"})
             .addFields({name:"コマンド", value:"info - BOTの情報を表示\n ping - pong\n reasion - なぞのリアクションをする\n random-wiki - wikipediaからランダムに記事を生成"})
@@ -88,10 +88,8 @@ client.on(Events.MessageCreate, async message => { //messageに作られたmessa
         message.react("🇿")
         message.react("🇮")
         message.react("🇱")
-        message.react("1315581965692567552")
         message.react("🇲")
         message.react("🇴")
-        message.react("1312766567339266129")
     }
     if (message.content.startsWith("buttes")) {
         const buttons = new ButtonBuilder()
@@ -113,5 +111,9 @@ client.on(Events.MessageCreate, async message => { //messageに作られたmessa
     }
     if (message.content.startsWith("top-article")) {
         message.channel.send("このコマンドは作成中です")
+    }
+    if (message.content.startsWith("random-cat")) {
+        const catimage = await axios.get("https://api.thecatapi.com/v1/images/search?limit=1")
+        message.channel.send(catimage.data[0].url)
     }
 });
